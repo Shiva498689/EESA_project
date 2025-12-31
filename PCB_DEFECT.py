@@ -1,12 +1,12 @@
-# ==============================================================================
-#  PCB DEFECT CLASSIFICATION PIPELINE - DETAILED ANALYSIS
-# ==============================================================================
+
+
+
 # This script converts a dataset of PCB images and XML annotations (Pascal VOC format)
 # into a format compatible with YOLOv8, trains a model, and visualizes the results.
 
 #  LIBRARY IMPORTS
-# ------------------
-# !pip install ultralytics sahi  <-- Installs YOLOv8 (ultralytics) and Sahi (slicing aid, though not used here directly)
+
+# !pip install ultralytics sahi Installs YOLOv8 (ultralytics) 
 
 import os           # For interacting with the Operating System (file paths, making directories)
 import shutil       # High-level file operations (copying images, deleting folders)
@@ -20,9 +20,8 @@ import matplotlib.pyplot as plt # For plotting graphs and displaying images
 import seaborn as sns           # For making statistical plots prettier (optional here but good practice)
 from ultralytics import YOLO    # The main class to load and train YOLOv8 models
 
-# ==========================================
-# ⚙️ CONFIGURATION (USER INPUTS)
-# ==========================================
+
+
 # 1. INPUT PATHS
 # These paths point to where your raw data sits in the Kaggle environment.
 USER_IMAGES_DIR = "/kaggle/input/pcb-defects/PCB_DATASET/images"
