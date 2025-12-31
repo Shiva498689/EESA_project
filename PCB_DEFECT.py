@@ -1,10 +1,10 @@
 # ==============================================================================
-# 📋 PCB DEFECT CLASSIFICATION PIPELINE - DETAILED ANALYSIS
+#  PCB DEFECT CLASSIFICATION PIPELINE - DETAILED ANALYSIS
 # ==============================================================================
 # This script converts a dataset of PCB images and XML annotations (Pascal VOC format)
 # into a format compatible with YOLOv8, trains a model, and visualizes the results.
 
-# 📦 LIBRARY IMPORTS
+#  LIBRARY IMPORTS
 # ------------------
 # !pip install ultralytics sahi  <-- Installs YOLOv8 (ultralytics) and Sahi (slicing aid, though not used here directly)
 
@@ -204,11 +204,11 @@ def prepare_dataset():
     return yaml_path, CLASSES
 
 # ==========================================
-# 🔥 PART 2: GPU TRAINING
+#  PART 2: GPU TRAINING
 # ==========================================
 def train_model(yaml_path):
     print("\n" + "="*40)
-    print("🔥 STARTING GPU TRAINING")
+    print(" STARTING GPU TRAINING")
     print("="*40)
     
     # Load the Model
@@ -253,11 +253,11 @@ def run_evaluation(model, yaml_path):
     # Calculate F1 Score (Harmonic Mean of Precision and Recall)
     f1 = 2 * (p * r) / (p + r + 1e-6) # 1e-6 added to avoid division by zero
     
-    print(f"\n✅ FINAL TEST RESULTS:")
-    print(f"   🎯 Precision: {p:.2%}")
-    print(f"   🔍 Recall:    {r:.2%}")
-    print(f"   ⚖️ F1 Score:  {f1:.2f}")
-    print(f"   🏆 mAP@50:    {map50:.2%}")
+    print(f"\n FINAL TEST RESULTS:")
+    print(f"    Precision: {p:.2%}")
+    print(f"    Recall:    {r:.2%}")
+    print(f"    F1 Score:  {f1:.2f}")
+    print(f"    mAP@50:    {map50:.2%}")
 
     # Display Confusion Matrix
     # YOLO automatically generates this matrix during validation. We just load and show it.
@@ -311,7 +311,7 @@ def visualize_results(model, class_names):
                     # Read normalized YOLO coordinates
                     xc, yc, nw, nh = map(float, data[1:])
                     
-                    # 🧮 MATH: UN-NORMALIZATION (YOLO -> PIXELS)
+                    #  MATH: UN-NORMALIZATION (YOLO -> PIXELS)
                     # Convert back to x_min, y_min, x_max, y_max for drawing
                     x1 = int((xc - nw/2) * w)
                     y1 = int((yc - nh/2) * h)
@@ -339,20 +339,20 @@ def visualize_results(model, class_names):
         fig, axes = plt.subplots(1, 2, figsize=(18, 9))
         
         axes[0].imshow(img_actual)
-        axes[0].set_title("✅ ACTUAL ANNOTATIONS (Ground Truth)", color='green', fontsize=14, fontweight='bold')
+        axes[0].set_title(" ACTUAL ANNOTATIONS (Ground Truth)", color='green', fontsize=14, fontweight='bold')
         axes[0].axis('off')
         
         axes[1].imshow(img_pred)
-        axes[1].set_title("🤖 MODEL PREDICTION (AI Result)", color='blue', fontsize=14, fontweight='bold')
+        axes[1].set_title(" MODEL PREDICTION (AI Result)", color='blue', fontsize=14, fontweight='bold')
         axes[1].axis('off')
         
         plt.tight_layout()
         plt.show()
 
 # ==========================================
-# 🚀 MAIN EXECUTION FLOW
+#  MAIN EXECUTION FLOW
 # ==========================================
-if __name__ == "__main__":
+ if __name__ == "__main__":
     # Step 1: Prepare the dataset (Convert XML -> YOLO Txt)
     data_yaml, classes = prepare_dataset()
     
