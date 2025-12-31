@@ -43,10 +43,10 @@ EPOCHS = 30         # How many times the model sees the entire dataset.
 BATCH_SIZE = 8      # How many images are processed at once before updating model weights.
 IMG_SIZE = 640      # Resolution to resize images to. YOLO is optimized for 640x640.
 
-print(f"🚀 HARDWARE CHECK: Running on {torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU'}")
+print(f" HARDWARE CHECK: Running on {torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'CPU'}")
 
 # ==========================================
-# 🛠️ PART 1: PREPARE DATA & SPLIT
+#  PART 1: PREPARE DATA & SPLIT
 # ==========================================
 def prepare_dataset():
     """
@@ -90,7 +90,7 @@ def prepare_dataset():
     classes = set() # A Set automatically removes duplicates, perfect for collecting class names.
     pairs = []      # Will hold tuples of (path_to_xml, path_to_image)
     
-    print("🔗 Matching annotations to images...")
+    print(" Matching annotations to images...")
     for xml_path in xml_list:
         # Extract Classes strictly to build the 'names' list for YOLO
         try:
@@ -130,7 +130,7 @@ def prepare_dataset():
     train_pairs = pairs[:split_idx]
     test_pairs = pairs[split_idx:]
     
-    print(f"📦 Splitting: {len(train_pairs)} Train images | {len(test_pairs)} Test images")
+    print(f" Splitting: {len(train_pairs)} Train images | {len(test_pairs)} Test images")
 
     # 5. Conversion Function (The Core Logic)
     def convert_and_save(pair_list, split_name):
@@ -167,7 +167,7 @@ def prepare_dataset():
                         ymax = float(bnd.find('ymax').text)
                         
                         # ---------------------------------------------------------
-                        # 🧮 MATH: COORDINATE NORMALIZATION
+                        #  MATH: COORDINATE NORMALIZATION
                         # XML gives top-left (xmin, ymin) and bottom-right (xmax, ymax).
                         # YOLO requires Center (x,y) and Width/Height, normalized 0-1.
                         #
@@ -232,11 +232,11 @@ def train_model(yaml_path):
     return model
 
 # ==========================================
-# 📊 PART 3: TEST SET EVALUATION
+#  PART 3: TEST SET EVALUATION
 # ==========================================
 def run_evaluation(model, yaml_path):
     print("\n" + "="*40)
-    print("🧪 CALCULATING METRICS ON TEST SET")
+    print(" CALCULATING METRICS ON TEST SET")
     print("="*40)
     
     # Run validation strictly on the 'test' split defined in yaml
@@ -271,16 +271,16 @@ def run_evaluation(model, yaml_path):
         plt.show()
 
 # ==========================================
-# 👁️ PART 4: SIDE-BY-SIDE VISUALIZATION
+#  PART 4: SIDE-BY-SIDE VISUALIZATION
 # ==========================================
-def visualize_results(model, class_names):
+  def visualize_results(model, class_names):
     """
     Visualizes the performance by plotting:
     LEFT: The image with Ground Truth (Manual Annotation)
     RIGHT: The image with Model Prediction (AI Output)
     """
     print("\n" + "="*40)
-    print("👁️ VISUALIZATION: ACTUAL (Left) vs PREDICTED (Right)")
+    print(" VISUALIZATION: ACTUAL (Left) vs PREDICTED (Right)")
     print("="*40)
     
     test_img_dir = f"{OUTPUT_DIR}/images/test"
